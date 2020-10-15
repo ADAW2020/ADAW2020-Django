@@ -1,4 +1,7 @@
 
+
+
+{%load static%}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 
@@ -9,7 +12,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<link rel="stylesheet" type="text/css" href="css/registro_usuario.css"/>
+<link rel="stylesheet" type="text/css" href="/static/Registro_cliente.css"/>
 
 <form method="POST" action="registrar.py">
 
@@ -17,12 +20,12 @@
             <div class="form">
 
                 <div class="home">
-                    <a href="home.html" class="btn btn-dark active" role="button" aria-pressed="true">home</a>       
+                    <a href="{% url 'home' %}" class="btn btn-dark active" role="button" aria-pressed="true">home</a>       
                     
                 </div>
 
                 <div class="note">
-                    <p>Registro de usuario</p>    
+                    <p>Registro de cliente</p>    
                 </div>
                 
                 <div class="form-content">

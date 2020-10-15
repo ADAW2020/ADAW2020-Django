@@ -1,3 +1,6 @@
+
+{%load static%}
+
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
     crossorigin="anonymous"></script>
 
@@ -15,11 +18,11 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="css/home.css" />
+<link rel="stylesheet" type="text/css" href="/static/Home.css" />
 
 <!-- date picker links-->
 
-<script src="/hotelApp1/templates/js/datepicker.js"></script>
+<script src="/static/datepicker.js"></script>
 
 
 
@@ -38,16 +41,16 @@
     <header>
         
         <nav class="botones-superiores">
-            <a href="form_usuario.html" class="btn btn-dark ingresar" role="button" aria-pressed="true">Ingresar</a>
-            <a href="form_usuario.html" class="btn btn-dark active" role="button" aria-pressed="true">Registrase</a>
+            <a href="{% static 'login.html' %}" class="btn btn-dark ingresar" role="button" aria-pressed="true">Ingresar</a>
+            <a href="{% url 'registrar-cliente' %}" class="btn btn-dark active" role="button" aria-pressed="true">Registrase</a>
             <a href="form_usuario.html" class="btn btn-dark consultas" role="button" aria-pressed="true">Consultas</a>
         </nav>
         <div class="top">
-            <img src="/hotelApp1/templates/media/images/dbs.png" class="dbsuper">
+            <img src="/static/dbs.png" class="dbsuper">
         </div>
     </header>
 
-    <form method="POST" action="seleccion.java">
+    <form method="POST" action="seleccion.py">
         <div class="dpicker-right">
             <input type="text" class="form-control" name="pickerR" id="depart" aria-label="Large"
                 aria-describedby="inputGroup-sizing-sm" placeholder="check-in">

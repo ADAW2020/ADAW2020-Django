@@ -1,6 +1,6 @@
 body {
 
-    background-image: url(village-min.jpg);
+    background-image: url(/static/village-min.jpg);
 }
 
 
@@ -13,14 +13,10 @@ body {
     width: 200px;
     height: 210.5px;
     margin-bottom: 5%;
-
 }
 
 
-.botones-izquierdos{
 
-    margin-l: 10%;
-}
 
 .dpicker-right {
     width: 25%;
