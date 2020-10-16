@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from hotelApp1 import models # traigo models para poder 
+from .models import Habitacion
 
 # Create your views here.
 def home(request):
     return render(request, 'hotelApp1/home.html')
 
-
+#-----------------------------------------------------------------
 
 def registrar_cliente(request):
     if request.method == "POST":
@@ -26,3 +27,12 @@ def registrar_cliente(request):
         print("los datos han sido guardados en la base de datos")
 
     return render(request, 'hotelApp1/registrar-cliente.html')
+
+#--------------------------------------------------------------------
+
+def reservas(request):
+    
+    habitaciones = models.Habitacion.objects.all()
+    context = {'habitaciones': habitaciones}
+
+    return render(request, 'hotelApp1/reservas.html', context)

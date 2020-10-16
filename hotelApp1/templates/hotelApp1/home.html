@@ -50,7 +50,8 @@
         </div>
     </header>
 
-    <form method="POST" action="">
+    <form method="POST" action="{% url 'reservas' %}">
+        {% csrf_token %}
         <div class="dpicker-right">
             <input type="text" class="form-control" name="pickerR" id="depart" aria-label="Large"
                 aria-describedby="inputGroup-sizing-sm" placeholder="check-in">

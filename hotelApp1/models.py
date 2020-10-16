@@ -14,17 +14,20 @@ class Clientes(models.Model):
     telefono = models.IntegerField()
     password = models.CharField(max_length=250)
 
+  
 class Habitacion(models.Model):
     numero = models.IntegerField(primary_key=True)
-    tipo = models.CharField(max_length=250) #doble, simple , triple
+    tipo = models.CharField(max_length=100)    
+
+
 
 class Reservas(models.Model):
-    dni_cliente = models.ForeignKey(Clientes, default=12187427, on_delete=models.CASCADE)
+    dni_cliente = models.ForeignKey(Clientes, default=None, on_delete=models.CASCADE)
     fecha_desde = models.DateTimeField(auto_now=False, auto_now_add=False)
     fecha_hasta = models.DateTimeField(auto_now=False, auto_now_add=False)
     codigo_reserva = models.IntegerField(primary_key=True, default=1) # 1 => codigo reserva por default
     estado = models.CharField(max_length=250, default='activa')
-    numero_habitacion = models.ForeignKey(Habitacion, default=1, on_delete=models.CASCADE)
+    numero_habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
 
 
      

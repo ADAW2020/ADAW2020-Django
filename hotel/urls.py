@@ -23,6 +23,7 @@ import hotelApp1.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', hotelApp1.views.home, name='home'),
-    path('registrar-cliente.html/',hotelApp1.views.registrar_cliente, name='registrar-cliente')
+    path('registrar-cliente.html/',hotelApp1.views.registrar_cliente, name='registrar-cliente'),
+    path('reservas.html/', hotelApp1.views.reservas, name='reservas'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
 urlpatterns += staticfiles_urlpatterns()
