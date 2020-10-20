@@ -18,7 +18,7 @@ def ingresar(request):
     if request.method == 'POST':
         nombre_usuario = request.POST['usuario']
         password = request.POST['password']
-        
+
         usuario = auth.authenticate(usuario=nombre_usuario, password=password)
         if usuario is not None:
             auth.login(request,usuario)
@@ -26,7 +26,7 @@ def ingresar(request):
 
     else:
         messages.info(request, 'Credenciales invalidas')
-        return redirect('login')  
+        #return redirect('ingresar.html')  
 
 
     

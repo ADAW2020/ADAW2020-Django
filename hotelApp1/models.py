@@ -12,6 +12,7 @@ class Clientes(models.Model):
     dni = models.IntegerField(primary_key=True)
     fecha_nacimiento = models.DateTimeField(auto_now=False, auto_now_add=False)
     telefono = models.IntegerField()
+    usuario = models.CharField(max_length=32)
     password = models.CharField(max_length=250)
 
   
