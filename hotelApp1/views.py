@@ -1,12 +1,38 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from hotelApp1 import models # traigo models para poder 
 from .models import Habitacion
-
+from django import forms
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm #formulario para autenticar que viene con django
+from django.contrib.auth.models import User, auth
 # Create your views here.
 def home(request):
-    return render(request, 'hotelApp1/home.html')
+    habitaciones = models.Habitacion.objects.all()
+    context = {'habitaciones': habitaciones}
+    return render(request, 'hotelApp1/home.html', context)
 
 #-----------------------------------------------------------------
+
+def ingresar(request):
+
+    if request.method == 'POST':
+        nombre_usuario = request.POST['usuario']
+        password = request.POST['password']
+        
+        usuario = auth.authenticate(usuario=nombre_usuario, password=password)
+        if usuario is not None:
+            auth.login(request,usuario)
+            return redirect("home.html")
+
+    else:
+        messages.info(request, 'Credenciales invalidas')
+        return redirect('login')  
+
+
+    
+    return render(request, 'hotelApp1/ingresar.html')
+
+
 
 def registrar_cliente(request):
     if request.method == "POST":
@@ -24,7 +50,8 @@ def registrar_cliente(request):
         ins = models.Clientes(nombre=nombre, apellido=apellido, dni=documento, fecha_nacimiento=fecha_nac, telefono=telefono, password=password)
 
         ins.save()  # este es el comando que graba los datos
-        print("los datos han sido guardados en la base de datos")
+        print("usuario registrado")
+        return redirect('registrar.html')
 
     return render(request, 'hotelApp1/registrar-cliente.html')
 
@@ -34,5 +61,16 @@ def reservas(request):
     
     habitaciones = models.Habitacion.objects.all()
     context = {'habitaciones': habitaciones}
+    
+    #form = FirstForm(request.POST)
+    pickerR = request.POST.get('pickerR', None)
+    
+    pickerL = request.POST.get('pickerL', None) #con esto capturo los datos del primer form
+
+    context['pickerR'] = pickerR
+
+    context['pickerL'] = pickerL
+
+    print(context)
 
     return render(request, 'hotelApp1/reservas.html', context)

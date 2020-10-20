@@ -1,0 +1,72 @@
+{%load static%}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+		
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+    crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+</script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="/static/Registro_cliente.css" />
+
+<!-- date picker links-->
+
+<script src="/static/datepicker.js"></script>
+
+
+
+<link href=" https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+
+
+
+<form method="POST" action="{% url 'home' %}">
+    {% csrf_token %} <!--esto es por seguridad contra forgery-->
+    <div class="container register-form">
+                <div class="form">
+    
+                    <div class="home">
+                        <a href="{% url 'home' %}" class="btn btn-dark active" role="button" aria-pressed="true">home</a>       
+                       
+                    </div>
+    
+                    <div class="note">
+                        <p>Ingresar al sitio</p>    
+                    </div>
+                    
+                    <div class="form-content">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="nombre_usuario" placeholder=" nombre de usuario *" value="" required/>
+                        </div>
+                         
+                                <div class="form-group">
+                                    <input type="password" class="form-control" id="confirm_pass" name="password" placeholder=" Password *" value="" required/>
+                                    <script src="/static/validar_pass.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <input type="submit" class="btnSubmit" value="Ingresar">
+    
+                    
+                </div>
+            </div></form>

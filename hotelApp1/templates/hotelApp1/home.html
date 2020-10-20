@@ -1,4 +1,3 @@
-
 {%load static%}
 
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
@@ -39,10 +38,12 @@
 <div class="general">
 
     <header>
-        
+
         <nav class="botones-superiores">
-            <a href="{% static 'login.html' %}" class="btn btn-dark ingresar" role="button" aria-pressed="true">Ingresar</a>
-            <a href="{% url 'registrar-cliente' %}" class="btn btn-dark active" role="button" aria-pressed="true">Registrase</a>
+            <a href="{% url 'ingresar' %}" class="btn btn-dark ingresar" role="button"
+                aria-pressed="true">Ingresar</a>
+            <a href="{% url 'registrar-cliente' %}" class="btn btn-dark active" role="button"
+                aria-pressed="true">Registrase</a>
             <a href="form_usuario.html" class="btn btn-dark consultas" role="button" aria-pressed="true">Consultas</a>
         </nav>
         <div class="top">
@@ -52,6 +53,8 @@
 
     <form method="POST" action="{% url 'reservas' %}">
         {% csrf_token %}
+
+
         <div class="dpicker-right">
             <input type="text" class="form-control" name="pickerR" id="depart" aria-label="Large"
                 aria-describedby="inputGroup-sizing-sm" placeholder="check-in">
@@ -62,19 +65,32 @@
                 aria-describedby="inputGroup-sizing-sm" placeholder="check-out">
         </div>
 
-       
-       
         <div class="buscar">
-            <input type ="submit" class="btn btn-dark buscar" aria-pressed="true" value="Buscar">
-        </div>
-    </form>
 
-    <div class="social-menu">
-        <ul>
-            <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="https://www.instagram.com"><i class="fa fa-instagram"></i></a></li>
-            <li><a href="https://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
-        </ul>
-    </div>
+            <label>Cantidad de huespedes </label>
+            <select name="cant_huespedes" class="select">
+
+                <div>
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                </div>
+
+            </select>
+
+
+            <input type="submit" class="btn btn-dark buscar" aria-pressed="true" value="Buscar">
+        </div>
+
+</form>
+
+<div class="social-menu">
+    <ul>
+        <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+        <li><a href="https://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+    </ul>
+</div>
 
 </div>

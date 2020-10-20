@@ -28,6 +28,7 @@ class Reservas(models.Model):
     codigo_reserva = models.IntegerField(primary_key=True, default=1) # 1 => codigo reserva por default
     estado = models.CharField(max_length=250, default='activa')
     numero_habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
+    cant_huespedes = models.IntegerField(default=1)
 
 
      
