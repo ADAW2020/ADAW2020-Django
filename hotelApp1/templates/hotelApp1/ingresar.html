@@ -1,9 +1,10 @@
 {%load static%}
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 
-		
+
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -37,36 +38,46 @@
 
 <link href=" https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
 
+<div class="error">
+    {% if error %}
+    {{ error }}
+    </div>
+    <br/>
+    <br/>
+    {% endif %}
 
+<form method="POST" action="{% url 'ingresar' %}">
+    {% csrf_token %}
 
-<form method="POST" action="{% url 'home' %}">
-    {% csrf_token %} <!--esto es por seguridad contra forgery-->
     <div class="container register-form">
-                <div class="form">
-    
-                    <div class="home">
-                        <a href="{% url 'home' %}" class="btn btn-dark active" role="button" aria-pressed="true">home</a>       
-                       
-                    </div>
-    
-                    <div class="note">
-                        <p>Ingresar al sitio</p>    
-                    </div>
-                    
-                    <div class="form-content">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="nombre_usuario" placeholder=" nombre de usuario *" value="" required/>
-                        </div>
-                         
-                                <div class="form-group">
-                                    <input type="password" class="form-control" id="confirm_pass" name="password" placeholder=" Password *" value="" required/>
-                                    <script src="/static/validar_pass.js"></script>
-                                </div>
-                            </div>
-                        </div>
-                
-                        <input type="submit" class="btnSubmit" value="Ingresar">
-    
-                    
+        <div class="form">
+
+            <div class="home">
+                <a href="{% url 'home' %}" class="btn btn-dark active" role="button" aria-pressed="true">home</a>
+
+            </div>
+
+            <div class="note">
+                <p>Ingresar al sitio</p>
+            </div>
+
+            <div class="form-content">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="usuario" placeholder=" nombre de usuario *"
+                        value="" required />
                 </div>
-            </div></form>
+
+                <div class="form-group">
+                    <input type="password" class="form-control" id="confirm_pass" name="password"
+                        placeholder=" Password *" value="" required />
+                    <script src="/static/validar_pass.js"></script>
+                </div>
+            </div>
+        </div>
+
+        <input type="submit" class="btnSubmit" value="Ingresar">
+
+
+    </div>
+
+</form>

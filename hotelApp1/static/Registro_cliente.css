@@ -11,6 +11,16 @@ body{
 
 
 }
+
+
+.error{
+
+ font-size: x-large;
+ color: tomato;
+ text-align: center;
+
+}
+
 .note
 {
     text-align: center;

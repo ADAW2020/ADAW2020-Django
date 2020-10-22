@@ -51,11 +51,11 @@ body {
 .botones-superiores {
     margin-top: 5%;
     margin-left: 75%;
-    
-    
+
+
 }
 
-.btn.btn-dark.active{
+.btn.btn-dark.active {
     border: 2px solid #ffffff;
 }
 
@@ -67,8 +67,13 @@ body {
 }
 
 
-    
 
+.btn.btn-dark.salir {
+    background-color: #cd201f;
+    border-width: 1px;
+    border-color: #ffffff;
+
+}
 
 
 

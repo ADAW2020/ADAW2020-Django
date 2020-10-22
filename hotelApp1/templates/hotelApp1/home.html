@@ -40,11 +40,20 @@
     <header>
 
         <nav class="botones-superiores">
-            <a href="{% url 'ingresar' %}" class="btn btn-dark ingresar" role="button"
-                aria-pressed="true">Ingresar</a>
-            <a href="{% url 'registrar-cliente' %}" class="btn btn-dark active" role="button"
-                aria-pressed="true">Registrase</a>
+
+            {% if user.is_authenticated %}
+            <a class="btn btn-dark salir" href="javascript:{document.getElementById('salir').submit()}" onclick="">Logout</a>
             <a href="form_usuario.html" class="btn btn-dark consultas" role="button" aria-pressed="true">Consultas</a>
+
+            <form id="salir" method="POST" action="{% url 'salir' %}">
+                {% csrf_token %}
+                <input type="hidden" />
+            </form>
+            {% else %}
+            <a href="{% url 'ingresar' %}" class="btn btn-dark ingresar" role="button" aria-pressed="true">Ingresar</a>
+            <a href="{% url 'registrar-cliente' %}" class="btn btn-dark active" role="button" aria-pressed="true">Registrase</a>
+            {% endif %}
+
         </nav>
         <div class="top">
             <img src="/static/dbs.png" class="dbsuper">
@@ -83,14 +92,30 @@
             <input type="submit" class="btn btn-dark buscar" aria-pressed="true" value="Buscar">
         </div>
 
-</form>
+    </form>
 
-<div class="social-menu">
-    <ul>
-        <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="https://www.instagram.com"><i class="fa fa-instagram"></i></a></li>
-        <li><a href="https://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
-    </ul>
+    <div class="social-menu">
+        <ul>
+            <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="https://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+    </div>
+
 </div>
 
-</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
+</body>
+
+</html>

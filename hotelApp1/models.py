@@ -6,6 +6,8 @@ class Administradores(models.Model):
     password = models.CharField(max_length=250)
     dni_admin = models.IntegerField(primary_key=True)
 
+
+
 class Clientes(models.Model):
     nombre = models.CharField(max_length=250)
     apellido = models.CharField(max_length=250)
@@ -15,11 +17,13 @@ class Clientes(models.Model):
     usuario = models.CharField(max_length=32)
     password = models.CharField(max_length=250)
 
+
   
 class Habitacion(models.Model):
     numero = models.IntegerField(primary_key=True)
-    tipo = models.CharField(max_length=100)    
-
+    tipo = models.CharField(max_length=100)
+    precio = models.IntegerField(default=100)    
+    
 
 
 class Reservas(models.Model):
@@ -30,6 +34,7 @@ class Reservas(models.Model):
     estado = models.CharField(max_length=250, default='activa')
     numero_habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
     cant_huespedes = models.IntegerField(default=1)
+
 
 
      
