@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User, auth
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 

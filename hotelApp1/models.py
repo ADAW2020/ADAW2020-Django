@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Administradores(models.Model):
@@ -27,7 +28,7 @@ class Habitacion(models.Model):
 
 
 class Reservas(models.Model):
-    dni_cliente = models.ForeignKey(Clientes, default=None, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_desde = models.DateTimeField(auto_now=False, auto_now_add=False)
     fecha_hasta = models.DateTimeField(auto_now=False, auto_now_add=False)
     codigo_reserva = models.IntegerField(primary_key=True, default=1) # 1 => codigo reserva por default

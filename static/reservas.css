@@ -1,0 +1,33 @@
+.general{
+margin-left: 60%;
+
+}
+.general .label-i{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+}
+
+
+.date-pickers{
+font-family: 'Courier New', Courier, monospace;
+font-size: x-large;
+color: #ffffff;
+}
+
+.btnSubmit{
+    margin-left: 39%;
+    font-size: large;
+    font-weight: bolder;
+    margin-top: 5px;
+    line-height: 15px;
+    border-color:black;
+    border-width: 5px;
+    border-radius:1.5rem;
+    padding: 1%;
+    width: 16%;
+    cursor: pointer;
+    background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+    color:black;
+}
+
+

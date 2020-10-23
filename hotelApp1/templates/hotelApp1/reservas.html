@@ -1,15 +1,28 @@
 {%load static%}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+		
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" type="text/css" href="/static/Registro_cliente.css"/>
+
 
 <div class="general">
 
 
 
-  <form>
-    <label>fecha ingreso:</label><br>
-    <input type="text" id="fname" name="fecha_ingreso" value={{pickerR}}><br>
-    <label>fecha salida:</label><br>
-    <input type="text" id="lname" name="fecha_salida" value={{pickerL}}><br>
-
+  <form method="POST" action="{ url 'reservar'}"> 
+    <div class="date-pickers">
+    <label class="label-i">fecha ingreso:</label><br>
+    <input type="text" id="fname" name="fecha_ingreso"  value={{pickerR}}>
+    <label class="label-s">fecha salida:</label><br>
+    <input type="text" id="lname" name="fecha_salida" required="" value={{pickerL}}>
+  </div>
 
     <div>
       <label>Cantidad de habitaciones</label>
@@ -31,6 +44,9 @@
         {% endfor %}
       </select>
     </div>
+
+    <input type="submit" class="btnSubmit" value="Registrar"> 
+
   </form>
 
 
