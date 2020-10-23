@@ -29,12 +29,12 @@ class Habitacion(models.Model):
 
 class Reservas(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    fecha_desde = models.DateTimeField(auto_now=False, auto_now_add=False)
+    fecha_desde = models.CharField(max_length=250)
     fecha_hasta = models.DateTimeField(auto_now=False, auto_now_add=False)
-    codigo_reserva = models.IntegerField(primary_key=True, default=1) # 1 => codigo reserva por default
+    codigo_reserva = models.IntegerField(primary_key=True) # 1 => codigo reserva por default
     estado = models.CharField(max_length=250, default='activa')
-    numero_habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
-    cant_huespedes = models.IntegerField(default=1)
+    cant_huespedes = models.IntegerField()
+    cant_habitaciones = models.IntegerField(default=1)
 
 
 

@@ -17,26 +17,39 @@
 
 
   <form method="POST" action="{ url 'reservar'}"> 
-    <div class="date-pickers">
-    <label class="label-i">fecha ingreso:</label><br>
-    <input type="text" id="fname" name="fecha_ingreso"  value={{pickerR}}>
-    <label class="label-s">fecha salida:</label><br>
-    <input type="text" id="lname" name="fecha_salida" required="" value={{pickerL}}>
-  </div>
 
+    <div class="date-pickers">
+    <label class="label-i">fecha ingreso:</label>
+  
+    <input type="text" id="fname" name="fecha_ingreso"  value={{pickerR}}>
+    <label class="label-s">fecha salida:</label>
+
+    <input type="text" id="lname" name="fecha_salida" required="" value={{pickerL}}>
+    <label class="label-s">cantidad de huespedes:</label>
+
+    <input type="text" id="ch" name="cant_huespedes" required="" value={{cant_huespedes}}>
+
+    <label class="label-s">Dias:{{cant_dias}}</label>
+    <br>
+    <label class="label-s">precio total:{{precioTotal}}</label>
+   
+  </div>
+  
     <div>
       <label>Cantidad de habitaciones</label>
-      <select>
+      <select name="cant_habitaciones">
 
         <option value=1>1</option>
         <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
 
       </select>
     </div>
 
     <div>
       <label>Tipo de habitación</label>
-      <select>
+      <select name="tipo_hab">
         {% for habitacion in habitaciones.all %}
 
         <option>{{habitacion.tipo}}</option>
