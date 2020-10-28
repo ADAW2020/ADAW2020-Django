@@ -2,10 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Administradores(models.Model):
-    nombre = models.CharField(max_length=250)
-    password = models.CharField(max_length=250)
-    dni_admin = models.IntegerField(primary_key=True)
 
 
 
@@ -21,10 +17,12 @@ class Clientes(models.Model):
 
   
 class Habitacion(models.Model):
-    numero = models.IntegerField(primary_key=True)
-    tipo = models.CharField(max_length=100)
     precio = models.IntegerField(default=100)    
-    
+    numero = models.IntegerField()
+    tipo = models.CharField(max_length=250)
+
+class tipoHabitacion(models.Model):
+    descripcion = models.CharField(max_length=40)
 
 
 class Reservas(models.Model):
@@ -35,6 +33,7 @@ class Reservas(models.Model):
     estado = models.CharField(max_length=250, default='activa')
     cant_huespedes = models.IntegerField()
     cant_habitaciones = models.IntegerField(default=1)
+    
 
 
 
