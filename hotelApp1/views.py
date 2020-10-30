@@ -68,8 +68,8 @@ def salir(request):
 
 def reservas(request):
 
-    habitaciones = models.Habitacion.objects.all()
-    context = {'habitaciones': habitaciones}
+    tipo_habitaciones = models.tipoHabitacion.objects.all()
+    context = {'tipo_habitaciones': tipo_habitaciones}
 
     # form = FirstForm(request.POST)
     pickerR = request.POST.get('pickerR', None)
@@ -99,11 +99,11 @@ def reservas(request):
 
     precioTotal = cantH
     
-    if context['habitaciones'] == 'simple' and cantH < 4:
+    if context['tipo_habitaciones'] == 'simple' and cantH < 4:
         precioTotal = cantH*120*20*dias
-    elif context['habitaciones'] == 'doble':
+    elif context['tipo_habitaciones'] == 'doble':
         precioTotal = cantH*120*30*dias
-    elif context['habitaciones'] == 'triple':
+    elif context['tipo_habitaciones'] == 'triple':
         precioTotal = cantH*120*40*dias
     
     print(precioTotal)

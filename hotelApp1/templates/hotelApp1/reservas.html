@@ -50,9 +50,9 @@
     <div>
       <label>Tipo de habitación</label>
       <select name="tipo_hab">
-        {% for habitacion in habitaciones.all %}
+        {% for tipoHabitacion in tipo_habitaciones.all %}
 
-        <option>{{habitacion.tipo}}</option>
+        <option>{{tipoHabitacion.descripcion}}</option>
 
         {% endfor %}
       </select>
