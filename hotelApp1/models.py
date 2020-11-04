@@ -25,4 +25,5 @@ class Reservas(models.Model):
     cant_huespedes = models.IntegerField()
     cant_habitaciones = models.IntegerField()
     precio_total = models.FloatField()
-    Habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
+    #Habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
+    cant_dias = models.IntegerField()

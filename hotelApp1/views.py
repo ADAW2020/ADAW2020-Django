@@ -7,14 +7,21 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User, auth
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from .models import Reservas
+from .models import Reservas, Habitacion
 import datetime
+from logging import Logger
+from django.contrib.sessions.models import Session
 # Create your views here.
 
 
 def home(request):
     habitaciones = models.Habitacion.objects.all()
     context = {'habitaciones': habitaciones}
+
+    tipo_habitaciones = models.tipoHabitacion.objects.all()
+
+    context['tipo_habitaciones'] = tipo_habitaciones
+
     return render(request, 'hotelApp1/home.html', context)
 
 # -----------------------------------------------------------------
@@ -77,8 +84,6 @@ def reservas(request):
     # con esto capturo los datos del primer form
     pickerL = request.POST.get('pickerL', None)
 
-    #cantH = request.POST.get('cant_huespedes', None)
-
     cantH = request.POST['cant_huespedes']
 
     context['pickerR'] = pickerR
@@ -87,36 +92,43 @@ def reservas(request):
 
     context['cant_huespedes'] = cantH
 
+    cantHabitaciones = request.POST['cant_habitaciones']
+    
+    context['cantHabitaciones'] = cantHabitaciones
+
     c = pickerL[:2]
     d = pickerR[:2]
 
     dias = int(c)-int(d)  
 
+    context['dias'] = dias
 
-    cant_dias ={'dias':dias}
-
-    context['dias'] = cant_dias
-
-    precioTotal = cantH
+    precioTotal = int(cantH)*int(cantHabitaciones)*100
     
-    if context['tipo_habitaciones'] == 'simple' and cantH < 4:
-        precioTotal = cantH*120*20*dias
-    elif context['tipo_habitaciones'] == 'doble':
-        precioTotal = cantH*120*30*dias
-    elif context['tipo_habitaciones'] == 'triple':
-        precioTotal = cantH*120*40*dias
+    context['precioTotal'] = precioTotal
     
-    print(precioTotal)
-    
-    #context['precio_total'] = precioTotal
-
-    if request.method == 'POST':
-        reservas = Reservas()
-        reservas.cant_huespedes = request.POST['cant_huespedes']
-        reservas.fecha_hasta = request.POST['pickerR']
-        reservas.fecha_desde = request.POST['pickerL']
-
-   # else:
+    num_habitacion = 0
 
     return render(request, 'hotelApp1/reservas.html', context)
+
+    if request.method == 'POST': #and request.user.is_authenticated():
+        reservas = Reservas()
+        reservas.cant_huespedes = cantH
+        reservas.fecha_hasta = pickerR
+        reservas.fecha_desde = pickerL
+        reservas.cant_habitaciones = cantHabitaciones
+        reservas.cant_dias = dias
+        reservas.precio_total = precioTotal
+        reservas.disponible = True
+        reservas.usuario = request.user
+
+        #ins = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
+        #cant_dias=dias, precio_total=precioTotal, disponible=True,usuario=request.user) 
+
+       # ins.save()
+    else:
+        return render({'mensaje':'Debe loguearse para poder reservar.'})
+
+       
     
+    return render(request, 'hotelApp1/reservas.html', {'confirmacion':'La reserva ha sido generada'})

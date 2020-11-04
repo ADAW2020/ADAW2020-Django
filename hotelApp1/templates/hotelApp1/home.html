@@ -87,8 +87,26 @@
                 </div>
 
             </select>
+            <div>
 
+              <!--  <label>Tipo de habitación </label>
+                <select name="tipo_hab">
+                  {% for tipoHabitacion in tipo_habitaciones.all %}
+          
+                  <option>{{tipoHabitacion.descripcion}}</option>
+          
+                  {% endfor %}
+                </select>-->
+              </div>
+              <label>Cantidad de habitaciones {{cant_habitaciones}}</label>
+      <select name="cant_habitaciones">
 
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+
+      </select>
             <input type="submit" class="btn btn-dark buscar" aria-pressed="true" value="Buscar">
         </div>
 

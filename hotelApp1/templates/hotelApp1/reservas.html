@@ -11,44 +11,39 @@
 
 <link rel="stylesheet" type="text/css" href="/static/Registro_cliente.css"/>
 
-
 <div class="general">
 
+  <div class="error">
+    {% if error %}
+    {{ error }}
+    </div>
+    <br/>
+    <br/>
+    {% endif %}
 
-
-  <form method="POST" action="{ url 'reservar'}"> 
-
+  <form method="POST" action="{% url 'registrar-cliente' %}"> 
+    {% csrf_token %}
     <div class="date-pickers">
-    <label class="label-i">fecha ingreso:</label>
+    <label class="label-i">fecha ingreso: {{pickerR}}</label>
   
-    <input type="text" id="fname" name="fecha_ingreso"  value={{pickerR}}>
-    <label class="label-s">fecha salida:</label>
+    <label class="label-s">fecha salida:{{pickerL}}</label>
 
-    <input type="text" id="lname" name="fecha_salida" required="" value={{pickerL}}>
-    <label class="label-s">cantidad de huespedes:</label>
-
-    <input type="text" id="ch" name="cant_huespedes" required="" value={{cant_huespedes}}>
-
-    <label class="label-s">Dias:{{cant_dias}}</label>
+    <label class="label-s">cantidad de huespedes: {{cant_huespedes}}</label>     
+  
+    <label class="label-s">Dias:{{dias}}  </label>
     <br>
     <label class="label-s">precio total:{{precioTotal}}</label>
-   
+      
   </div>
   
     <div>
-      <label>Cantidad de habitaciones</label>
-      <select name="cant_habitaciones">
-
-        <option value=1>1</option>
-        <option value=2>2</option>
-        <option value=3>3</option>
-        <option value=4>4</option>
-
-      </select>
+      <label>Cantidad de habitaciones {{cantHabitaciones}}</label>
+      
     </div>
 
     <div>
-      <label>Tipo de habitación</label>
+
+      <label>Tipo de habitación </label>
       <select name="tipo_hab">
         {% for tipoHabitacion in tipo_habitaciones.all %}
 
@@ -62,8 +57,10 @@
 
   </form>
 
+<div class="confirmacion">
+  {{ confirmacion }}
 
-
+</div>
 
 
 </div>
