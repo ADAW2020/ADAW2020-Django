@@ -21,7 +21,7 @@
     <br/>
     {% endif %}
 
-  <form method="POST" action="{% url 'registrar-cliente' %}"> 
+  <form method="POST" action="{% url 'confirmacion' %}"> 
     {% csrf_token %}
     <div class="date-pickers">
     <label class="label-i">fecha ingreso: {{pickerR}}</label>

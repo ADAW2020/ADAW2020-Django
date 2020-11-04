@@ -10,9 +10,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Reservas, Habitacion
 import datetime
 from logging import Logger
-from django.contrib.sessions.models import Session
+import re
+#from django.contrib.sessions.models import Session
 # Create your views here.
-
 
 def home(request):
     habitaciones = models.Habitacion.objects.all()
@@ -25,7 +25,6 @@ def home(request):
     return render(request, 'hotelApp1/home.html', context)
 
 # -----------------------------------------------------------------
-
 
 def registrar_cliente(request):
     if request.method == 'POST':
@@ -84,15 +83,15 @@ def reservas(request):
     # con esto capturo los datos del primer form
     pickerL = request.POST.get('pickerL', None)
 
-    cantH = request.POST['cant_huespedes']
+    cantH = (request.POST.get('cant_huespedes'))
 
     context['pickerR'] = pickerR
 
     context['pickerL'] = pickerL 
 
-    context['cant_huespedes'] = cantH
-
-    cantHabitaciones = request.POST['cant_habitaciones']
+    context['cantidad_huespedes'] = (cantH)
+    
+    cantHabitaciones = int(request.POST.get('cant_habitaciones'))
     
     context['cantHabitaciones'] = cantHabitaciones
 
@@ -103,15 +102,19 @@ def reservas(request):
 
     context['dias'] = dias
 
-    precioTotal = int(cantH)*int(cantHabitaciones)*100
+ 
+
+    precioTotal = cantHabitaciones * dias *100
     
     context['precioTotal'] = precioTotal
     
     num_habitacion = 0
 
+
+
     return render(request, 'hotelApp1/reservas.html', context)
 
-    if request.method == 'POST': #and request.user.is_authenticated():
+    if request.method == 'POST' and request.user.is_authenticated():
         reservas = Reservas()
         reservas.cant_huespedes = cantH
         reservas.fecha_hasta = pickerR
@@ -122,13 +125,19 @@ def reservas(request):
         reservas.disponible = True
         reservas.usuario = request.user
 
-        #ins = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
-        #cant_dias=dias, precio_total=precioTotal, disponible=True,usuario=request.user) 
+        ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
+        cant_dias=dias, precio_total=precioTotal, disponible=True,usuario=request.user) 
 
        # ins.save()
     else:
-        return render({'mensaje':'Debe loguearse para poder reservar.'})
+       return render({'mensaje':'Debe loguearse para poder reservar.'})
 
        
     
     return render(request, 'hotelApp1/reservas.html', {'confirmacion':'La reserva ha sido generada'})
+
+
+#-------------------------------------------------------------------------------
+
+def confirmacion(request):
+    return render(request, 'hotelApp1/confirmacion.html')

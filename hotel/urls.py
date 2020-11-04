@@ -28,5 +28,6 @@ urlpatterns = [
     path('reservas.html/', hotelApp1.views.reservas, name='reservas'),
     path('salir.html/', hotelApp1.views.salir, name='salir'),
     path('',include("django.contrib.auth.urls")),
+    path('confirmacion.html/',hotelApp1.views.confirmacion, name='confirmacion'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
 urlpatterns += staticfiles_urlpatterns()
