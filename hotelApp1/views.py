@@ -75,6 +75,10 @@ def no_disponibilidad(request):
 # --------------------------------------------------------------------
 
 def reservas(request):
+
+        tipo_habitaciones = models.tipoHabitacion.objects.all()
+        context = {'tipo_habitaciones': tipo_habitaciones}
+
     # 
         pickerR = request.POST.get('pickerR', None)
 
@@ -84,7 +88,6 @@ def reservas(request):
 
         pickerL_checking = datetime.datetime.strptime(pickerL, '%d/%m/%Y')  #convierto la fecha de tipo string a datetime
 
-       
         cantH = (request.POST.get('cant_huespedes'))
 
         context['pickerR'] = pickerR
@@ -92,12 +95,7 @@ def reservas(request):
         context['pickerL'] = pickerL
 
         context['cantidad_huespedes'] = (cantH)
-
-        tipo_habitaciones = models.tipoHabitacion.objects.all()
-
-        context = {'tipo_habitaciones': tipo_habitaciones}
-
-
+    
         cantHabitaciones = int(request.POST.get('cant_habitaciones'))
     
         context['cantHabitaciones'] = cantHabitaciones
