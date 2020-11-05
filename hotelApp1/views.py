@@ -22,6 +22,7 @@ def home(request):
 
     context['tipo_habitaciones'] = tipo_habitaciones
 
+
     return render(request, 'hotelApp1/home.html', context)
 
 # -----------------------------------------------------------------
@@ -69,75 +70,86 @@ def salir(request):
         auth.logout(request)
         return redirect('home')
 
-
+def no_disponibilidad(request):
+    return render(request, 'hotelApp1/no_disponibilidad.html')
 # --------------------------------------------------------------------
 
 def reservas(request):
 
-    tipo_habitaciones = models.tipoHabitacion.objects.all()
-    context = {'tipo_habitaciones': tipo_habitaciones}
 
-    # form = FirstForm(request.POST)
-    pickerR = request.POST.get('pickerR', None)
+        formato_fecha = '%d/%m/%Y'
 
-    # con esto capturo los datos del primer form
-    pickerL = request.POST.get('pickerL', None)
+        tipo_habitaciones = models.tipoHabitacion.objects.all()
+        context = {'tipo_habitaciones': tipo_habitaciones}
 
-    cantH = (request.POST.get('cant_huespedes'))
+    # 
+        pickerR = request.POST.get('pickerR', None)
 
-    context['pickerR'] = pickerR
+        pickerR_checkout = datetime.datetime.strptime(pickerR, '%d/%m/%Y') #convierto la fecha de tipo string a datetime
 
-    context['pickerL'] = pickerL 
+        pickerL = request.POST.get('pickerL', None)
 
-    context['cantidad_huespedes'] = (cantH)
+        pickerL_checking = datetime.datetime.strptime(pickerL, '%d/%m/%Y')  #convierto la fecha de tipo string a datetime
+
+        cantH = (request.POST.get('cant_huespedes'))
+
+        context['pickerR'] = pickerR
+
+        context['pickerL'] = pickerL
+
+        context['cantidad_huespedes'] = (cantH)
     
-    cantHabitaciones = int(request.POST.get('cant_habitaciones'))
+        cantHabitaciones = int(request.POST.get('cant_habitaciones'))
     
-    context['cantHabitaciones'] = cantHabitaciones
+        context['cantHabitaciones'] = cantHabitaciones
 
-    c = pickerL[:2]
-    d = pickerR[:2]
+        c = pickerL[:2]
+        d = pickerR[:2]
 
-    dias = int(c)-int(d)  
+        dias = int(c)-int(d)  
 
-    context['dias'] = dias
+        context['dias'] = dias
 
  
 
-    precioTotal = cantHabitaciones * dias *100
+        precioTotal = cantHabitaciones * dias *100
     
-    context['precioTotal'] = precioTotal
+        context['precioTotal'] = precioTotal
     
-    num_habitacion = 0
+        num_habitacion = 0
 
 
 
-    return render(request, 'hotelApp1/reservas.html', context)
+        return render(request, 'hotelApp1/reservas.html', context)
 
-    if request.method == 'POST' and request.user.is_authenticated():
-        reservas = Reservas()
-        reservas.cant_huespedes = cantH
-        reservas.fecha_hasta = pickerR
-        reservas.fecha_desde = pickerL
-        reservas.cant_habitaciones = cantHabitaciones
-        reservas.cant_dias = dias
-        reservas.precio_total = precioTotal
-        reservas.disponible = True
-        reservas.usuario = request.user
+        if request.method == 'POST' and request.user.is_authenticated():
+            reservas = Reservas()
+            reservas.cant_huespedes = cantH
+            reservas.fecha_hasta = pickerR_checkout
+            reservas.fecha_desde = pickerL_checking
+            reservas.cant_habitaciones = cantHabitaciones
+            reservas.cant_dias = dias
+            reservas.precio_total = precioTotal
+            reservas.disponible = True
+            reservas.usuario = request.user
 
-        ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
-        cant_dias=dias, precio_total=precioTotal, disponible=True,usuario=request.user) 
+            ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
+            cant_dias=dias, precio_total=precioTotal, disponible=True,usuario=request.user) 
 
        # ins.save()
-    else:
-       return render({'mensaje':'Debe loguearse para poder reservar.'})
+        else:
+            return render({'mensaje':'Debe loguearse para poder reservar.'})
 
        
     
-    return render(request, 'hotelApp1/reservas.html', {'confirmacion':'La reserva ha sido generada'})
-
+        return render(request, 'hotelApp1/reservas.html', {'confirmacion':'La reserva ha sido generada'})
+  
 
 #-------------------------------------------------------------------------------
 
 def confirmacion(request):
     return render(request, 'hotelApp1/confirmacion.html')
+
+
+
+

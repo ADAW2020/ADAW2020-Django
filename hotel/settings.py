@@ -136,3 +136,7 @@ MEDIA_URL = '/media/'
 
 
 LOGIN_REDIRECT_URL = "/"
+
+
+
+DATETIME_FORMAT = ['%d-%m-%Y']

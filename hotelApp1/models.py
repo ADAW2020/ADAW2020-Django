@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
+import hotel.settings
 
 # Create your models here.
 
@@ -12,8 +13,8 @@ class Habitacion(models.Model):
     numero = models.IntegerField()
     disponible = models.BooleanField()
     tipo = models.ForeignKey(tipoHabitacion, on_delete=models.CASCADE)
-
-
+    fecha_checking = models.DateField()
+    fecha_checkout = models.DateField()
     
 
 class Reservas(models.Model):
