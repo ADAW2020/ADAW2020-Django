@@ -87,25 +87,29 @@ def reservas(request):
     
     habitaciones = Habitacion.objects.all()
     
-    for hd in habitaciones:
-        if Habitacion[hd].fecha_checkout >= pickerL_checking and  pickerR_checkout <= Habitacion[hd].fecha_checking:
-            cantHabitaciones = int(request.POST.get('cant_habitaciones'))
-            cantH = (request.POST.get('cant_huespedes'))
-            tipo_habitaciones = models.tipoHabitacion.objects.all()
-            
-            context = {'tipo_habitaciones': tipo_habitaciones}
-            context['pickerR'] = pickerR
-            context['pickerL'] = pickerL
+    Habitacion.fecha_checking 
 
-            context['cantidad_huespedes'] = cantH
-            context['cantHabitaciones'] = cantHabitaciones
-            c = pickerL[:2]
-            d = pickerR[:2]
-            dias = int(c)-int(d)  
-            context['dias'] = dias
-            precioTotal = cantHabitaciones * dias *100
-            context['precioTotal'] = precioTotal
-            num_habitacion = 0
+
+    for h in habitaciones:
+        if h.fecha_checkout >= pickerL_checking and pickerR_checkout <= h.fecha_checking:
+            return render(request, 'hotelApp1/no_disponibilidad.html')
+
+    cantHabitaciones = int(request.POST.get('cant_habitaciones'))
+    cantH = (request.POST.get('cant_huespedes'))
+    tipo_habitaciones = models.tipoHabitacion.objects.all()
+          
+    context = {'tipo_habitaciones': tipo_habitaciones}
+    context['pickerR'] = pickerR
+    context['pickerL'] = pickerL
+    context['cantidad_huespedes'] = cantH
+    context['cantHabitaciones'] = cantHabitaciones
+    c = pickerL[:2]
+    d = pickerR[:2]
+    dias = int(c)-int(d)  
+    context['dias'] = dias
+    precioTotal = cantHabitaciones * dias *100
+    context['precioTotal'] = precioTotal
+    num_habitacion = 0
         #     if request.method == 'POST' and request.user.is_authenticated():
         #         reservas = Reservas()
         #         reservas.cant_huespedes = cantH
@@ -122,8 +126,7 @@ def reservas(request):
         #     else:
         #         return render({'mensaje':'Debe loguearse para poder reservar.'})
                     
-        # else:
-        #     return render(request, 'hotelApp1/no_disponibilidad.html')
+        # 
     return render(request, 'hotelApp1/reservas.html')
 #-------------------------------------------------------------------------------
 

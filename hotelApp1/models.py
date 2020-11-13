@@ -2,12 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 import uuid
 import hotel.settings
+import datetime
+from django import forms
 
 # Create your models here.
 
 class tipoHabitacion(models.Model):
     descripcion = models.CharField(max_length=40)
   
+
+
 class Habitacion(models.Model):
     precio = models.IntegerField()    
     numero = models.IntegerField()
