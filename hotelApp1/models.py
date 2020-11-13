@@ -17,8 +17,8 @@ class Habitacion(models.Model):
     numero = models.IntegerField()
     disponible = models.BooleanField()
     tipo = models.ForeignKey(tipoHabitacion, on_delete=models.CASCADE)
-    fecha_checking = models.DateField()
-    fecha_checkout = models.DateField()
+    fecha_checking = models.DateField('%d/%m/%Y')
+    fecha_checkout = models.DateField('%d/%m/%Y')
     
 
 class Reservas(models.Model):
