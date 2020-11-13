@@ -91,9 +91,9 @@ def reservas(request):
 
 
     for h in habitaciones:
-        if h.fecha_checkout >= pickerL_checking and pickerR_checkout <= h.fecha_checking:
+        if h.fecha_checkout > pickerL_checking and pickerR_checkout > h.fecha_checking or h.fecha_checkout > pickerL_checking and pickerR_checkout < h.fecha_checking or h.fecha_checkout < pickerL_checking and pickerR_checkout > h.fecha_checking or h.fecha_checking and h.fecha_checkout != None :
             return render(request, 'hotelApp1/no_disponibilidad.html')
-
+                    
     cantHabitaciones = int(request.POST.get('cant_habitaciones'))
     cantH = (request.POST.get('cant_huespedes'))
     tipo_habitaciones = models.tipoHabitacion.objects.all()
