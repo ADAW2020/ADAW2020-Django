@@ -13,20 +13,21 @@ body {
     width: 200px;
     height: 210.5px;
     margin-bottom: 5%;
+    margin-left: 41%;
 }
 
 
 
 
 .dpicker-right {
-    width: 25%;
+    width: 22%;
     float: left;
     padding: 10px;
-    margin-left: 25%;
+    margin-left: 28%;
 }
 
 .dpicker-left {
-    width: 25%;
+    width: 22%;
     float: left;
     padding: 10px;
 }
@@ -49,12 +50,16 @@ body {
 }
 
 .botones-superiores {
-    margin-top: 5%;
-    margin-left: 75%;
+    margin-top: 1%;
+    margin-left: 78%;
     
     
 }
-
+.botonesizquierdos{
+    margin-top: -3%;
+    margin-left: 2%;
+    
+}
 .btn.btn-dark.active{
     border: 2px solid #ffffff;
 }
@@ -64,19 +69,28 @@ body {
     background-color: #063eb8;
     border-width: 1px;
     border-color: #ffffff;
+} 
+
+.huesped{
+    margin-top: 15px;
+    margin-left: 5%;
+}
+
+.habitacion{
+    margin-top:15px;
+    margin-left: 4%;
 }
 
 .buscar {
-
-    margin-top: 60px;
-
-    margin-left: -30%;
+    margin-top: 5px;
+    margin-left: 21%;
 }
 
 .btn.btn-dark.buscar {
 
+    margin-top: 10px;
     font-size: 20;
-    width: 20%;
+    width: 32%;
     background-color: #020103f1;
     border-width: 2px;
     border-color: #ffffff;

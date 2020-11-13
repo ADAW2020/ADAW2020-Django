@@ -30,8 +30,8 @@
 
 <style>
     form {
-        width: 70%;
-        margin: 100px auto;
+        width: 100%;
+        margin: 50px auto;
     }
 </style>
 
@@ -44,6 +44,7 @@
             {% if user.is_authenticated %}
             <a class="btn btn-dark salir" href="javascript:{document.getElementById('salir').submit()}" onclick="">Logout</a>
             <a href="form_usuario.html" class="btn btn-dark consultas" role="button" aria-pressed="true">Consultas</a>
+            
 
             <form id="salir" method="POST" action="{% url 'salir' %}">
                 {% csrf_token %}
@@ -52,14 +53,19 @@
             {% else %}
             <a href="{% url 'ingresar' %}" class="btn btn-dark ingresar" role="button" aria-pressed="true">Ingresar</a>
             <a href="{% url 'registrar-cliente' %}" class="btn btn-dark active" role="button" aria-pressed="true">Registrase</a>
+            <a href="consultar.html" class="btn btn-dark consultas" role="button" aria-pressed="true">Consultas</a>
             {% endif %}
 
         </nav>
+        <nav class="botonesizquierdos"  >
+           
+            <a href="Imagenes.html" class="btn btn-dark imagenes" role="button" aria-pressed="true">Ver imagenes</a>
+            <a href="info.html" class="btn btn-dark info" role="button" aria-pressed="true">+ Info</a>
         <div class="top">
             <img src="/static/dbs.png" class="dbsuper">
         </div>
     </header>
-
+    
     <form method="POST" action="{% url 'reservas' %}">
         {% csrf_token %}
 
@@ -67,40 +73,49 @@
         <div class="dpicker-right">
             <input type="text" class="form-control" name="pickerR" id="depart" aria-label="Large"
                 aria-describedby="inputGroup-sizing-sm" placeholder="check-in">
+            
+            <div class="huesped">
+                <h4> <label style="color:white">   Cantidad de huespedes   </label>
+            <select name="cantidad_huespedes" class="select" id="CH">
+             
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+
+             </select>
+            </h4> </div>
         </div>
 
         <div class="dpicker-left">
             <input type="text" class="form-control" name="pickerL" id="return" aria-label="Large"
                 aria-describedby="inputGroup-sizing-sm" placeholder="check-out">
+
+            <div class="habitacion">
+                <h4> <label style="color:white">Cantidad de habitaciones</label>
+            <select name="cant_habitaciones">
+
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+            </select>   
+        </h4></div>
         </div>
-
-        <div class="buscar">
-
-            <label>Cantidad de huespedes </label>
-            <select name="cant_huespedes" class="select" id="CH">
-
-                <div>
-                    <option value=1>1</option>
-                    <option value=2>2</option>
-                    <option value=3>3</option>
-                    <option value=4>4</option>
-                </div>
-
-            </select>
-
-
-            <input type="submit" class="btn btn-dark buscar" aria-pressed="true" value="Buscar">
-        </div>
-
+        
+    <div class="buscar">    
+        <input type="submit" class="btn btn-dark buscar" aria-pressed="true" value="Buscar">
+    </div>
+       
     </form>
 
-    <div class="social-menu">
+<div class="social-menu">
         <ul>
             <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
             <li><a href="https://www.instagram.com"><i class="fa fa-instagram"></i></a></li>
             <li><a href="https://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
         </ul>
-    </div>
+</div>
 
 </div>
 

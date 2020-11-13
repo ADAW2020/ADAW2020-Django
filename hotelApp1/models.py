@@ -1,41 +1,30 @@
 from django.db import models
 from django.contrib.auth.models import User
+import uuid
+import hotel.settings
 
 # Create your models here.
-class Administradores(models.Model):
-    nombre = models.CharField(max_length=250)
-    password = models.CharField(max_length=250)
-    dni_admin = models.IntegerField(primary_key=True)
 
-
-
-class Clientes(models.Model):
-    nombre = models.CharField(max_length=250)
-    apellido = models.CharField(max_length=250)
-    dni = models.IntegerField(primary_key=True)
-    fecha_nacimiento = models.DateTimeField(auto_now=False, auto_now_add=False)
-    telefono = models.IntegerField()
-    usuario = models.CharField(max_length=32)
-    password = models.CharField(max_length=250)
-
-
+class tipoHabitacion(models.Model):
+    descripcion = models.CharField(max_length=40)
   
 class Habitacion(models.Model):
-    numero = models.IntegerField(primary_key=True)
-    tipo = models.CharField(max_length=100)
-    precio = models.IntegerField(default=100)    
+    precio = models.IntegerField()    
+    numero = models.IntegerField()
+    disponible = models.BooleanField()
+    tipo = models.ForeignKey(tipoHabitacion, on_delete=models.CASCADE)
+    fecha_checking = models.DateField('%d/%m/%Y')
+    fecha_checkout = models.DateField('%d/%m/%Y')
     
-
 
 class Reservas(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_desde = models.CharField(max_length=250)
-    fecha_hasta = models.DateTimeField(auto_now=False, auto_now_add=False)
-    codigo_reserva = models.IntegerField(primary_key=True) # 1 => codigo reserva por default
-    estado = models.CharField(max_length=250, default='activa')
+    fecha_hasta = models.CharField(max_length=250)
+    codigo_reserva = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) #  codigo reserva por default autogenerado
+    disponible = models.BooleanField()
     cant_huespedes = models.IntegerField()
-    cant_habitaciones = models.IntegerField(default=1)
-
-
-
-     
+    cant_habitaciones = models.IntegerField()
+    precio_total = models.FloatField()
+    #Habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
+    cant_dias = models.IntegerField()
