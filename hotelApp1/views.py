@@ -12,6 +12,8 @@ import datetime
 from logging import Logger
 import re
 from django.http import HttpResponseRedirect
+from datetime import date
+from datetime import datetime
 #from django.contrib.sessions.models import Session
 # Create your views here.
 
@@ -79,21 +81,26 @@ def reservas(request):
 
     pickerR = request.POST.get('pickerR', None)
     
-    pickerR_checkout = datetime.datetime.strptime(pickerR, '%d/%m/%Y') #convierto la fecha de tipo string a datetime
+    pickerR_checkout = datetime.strptime(pickerR, '%d/%m/%Y').date() #convierto la fecha de tipo string a datetime
     
     pickerL = request.POST.get('pickerL', None)
     
-    pickerL_checking = datetime.datetime.strptime(pickerL, '%d/%m/%Y')  #convierto la fecha de tipo string a datetime
-    
+    pickerL_checking = datetime.strptime(pickerL, '%d/%m/%Y').date()  #convierto la fecha de tipo string a datetime
+
     habitaciones = Habitacion.objects.all()
     
-    Habitacion.fecha_checking 
+    
 
+    
+    #import pdb; pdb.set_trace()  
+    
 
     for h in habitaciones:
         if h.fecha_checkout > pickerL_checking and pickerR_checkout > h.fecha_checking or h.fecha_checkout > pickerL_checking and pickerR_checkout < h.fecha_checking or h.fecha_checkout < pickerL_checking and pickerR_checkout > h.fecha_checking or h.fecha_checking and h.fecha_checkout != None :
             return render(request, 'hotelApp1/no_disponibilidad.html')
-                    
+
+     
+
     cantHabitaciones = int(request.POST.get('cant_habitaciones'))
     cantH = (request.POST.get('cant_huespedes'))
     tipo_habitaciones = models.tipoHabitacion.objects.all()
@@ -110,23 +117,32 @@ def reservas(request):
     precioTotal = cantHabitaciones * dias *100
     context['precioTotal'] = precioTotal
     num_habitacion = 0
-        #     if request.method == 'POST' and request.user.is_authenticated():
-        #         reservas = Reservas()
-        #         reservas.cant_huespedes = cantH
-        #         reservas.fecha_hasta = pickerR_checkout
-        #         reservas.fecha_desde = pickerL_checking
-        #         reservas.cant_habitaciones = cantHabitaciones
-        #         reservas.cant_dias = dias
-        #         reservas.precio_total = precioTotal
-        #         reservas.disponible = True
-        #         reservas.usuario = request.user
-        #         ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
-        #             cant_dias=dias, precio_total=precioTotal, disponible=True,usuario=request.user) 
+    if request.method == 'POST' and request.user.is_authenticated():
+                reservas = Reservas()
+                reservas.cant_huespedes = cantH
+                reservas.fecha_hasta = pickerR_checkout
+                reservas.fecha_desde = pickerL_checking
+                reservas.cant_habitaciones = cantHabitaciones
+                reservas.cant_dias = dias
+                reservas.precio_total = precioTotal
+                reservas.disponible = True
+                reservas.usuario = request.user
+                habitacion = Habitacion()
+                habitacion.fecha_checking = pickerL_checking
+                habitacion.fecha_checkout = pickerR_checkout
+        
+                ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
+                    cant_dias=dias, precio_total=precioTotal, disponible=True,usuario=request.user) 
 
-        #     else:
-        #         return render({'mensaje':'Debe loguearse para poder reservar.'})
+                ins2 = Habitacion(fecha_checking=pickerL_checking, fecha_checkout=pickerR_checkout)
+
+                ins1.save()
+                ins2.save()
+
+    else:
+                return render({'mensaje':'Debe loguearse para poder reservar.'})
                     
-        # 
+        
     return render(request, 'hotelApp1/reservas.html')
 #-------------------------------------------------------------------------------
 
