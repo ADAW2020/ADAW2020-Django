@@ -92,14 +92,12 @@ def reservas(request):
     
 
     
-    #import pdb; pdb.set_trace()  
+    import pdb; pdb.set_trace()
     
 
     for h in habitaciones:
-        if h.fecha_checkout > pickerL_checking and pickerR_checkout > h.fecha_checking or h.fecha_checkout > pickerL_checking and pickerR_checkout < h.fecha_checking or h.fecha_checkout < pickerL_checking and pickerR_checkout > h.fecha_checking or h.fecha_checking and h.fecha_checkout != None :
+         if h.fecha_checking <= pickerL_checking and pickerR_checkout <= h.fecha_checkout:             
             return render(request, 'hotelApp1/no_disponibilidad.html')
-
-     
 
     cantHabitaciones = int(request.POST.get('cant_habitaciones'))
     cantH = (request.POST.get('cant_huespedes'))
