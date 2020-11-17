@@ -26,7 +26,6 @@ class Reservas(models.Model):
     fecha_desde = models.CharField(max_length=250)
     fecha_hasta = models.CharField(max_length=250)
     codigo_reserva = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) #  codigo reserva por default autogenerado
-    disponible = models.BooleanField()
     cant_huespedes = models.IntegerField()
     cant_habitaciones = models.IntegerField()
     precio_total = models.FloatField()

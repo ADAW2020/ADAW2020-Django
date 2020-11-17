@@ -79,6 +79,8 @@ def no_disponibilidad(request):
 
 def reservas(request):
 
+
+
     pickerR = request.POST.get('pickerR', None)
     
     pickerR_checkout = datetime.strptime(pickerR, '%d/%m/%Y').date() #convierto la fecha de tipo string a datetime
@@ -92,7 +94,7 @@ def reservas(request):
     
 
     
-    import pdb; pdb.set_trace()
+    #import pdb; pdb.set_trace()
     
 
     for h in habitaciones:
@@ -100,13 +102,15 @@ def reservas(request):
             return render(request, 'hotelApp1/no_disponibilidad.html')
 
     cantHabitaciones = int(request.POST.get('cant_habitaciones'))
-    cantH = (request.POST.get('cant_huespedes'))
+    
+    cantH = request.POST.get('cantidad_huespedes')
+    #import pdb; pdb.set_trace()
     tipo_habitaciones = models.tipoHabitacion.objects.all()
-          
+         
     context = {'tipo_habitaciones': tipo_habitaciones}
     context['pickerR'] = pickerR
     context['pickerL'] = pickerL
-    context['cantidad_huespedes'] = cantH
+    context['cant_huespedes'] = cantH
     context['cantHabitaciones'] = cantHabitaciones
     c = pickerL[:2]
     d = pickerR[:2]
@@ -115,7 +119,8 @@ def reservas(request):
     precioTotal = cantHabitaciones * dias *100
     context['precioTotal'] = precioTotal
     num_habitacion = 0
-    if request.method == 'POST' and request.user.is_authenticated():
+    #import pdb; pdb.set_trace()
+    if request.method == 'POST': #and request.user.is_authenticated():
                 reservas = Reservas()
                 reservas.cant_huespedes = cantH
                 reservas.fecha_hasta = pickerR_checkout
@@ -123,14 +128,12 @@ def reservas(request):
                 reservas.cant_habitaciones = cantHabitaciones
                 reservas.cant_dias = dias
                 reservas.precio_total = precioTotal
-                reservas.disponible = True
                 reservas.usuario = request.user
                 habitacion = Habitacion()
                 habitacion.fecha_checking = pickerL_checking
                 habitacion.fecha_checkout = pickerR_checkout
-        
                 ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
-                    cant_dias=dias, precio_total=precioTotal, disponible=True,usuario=request.user) 
+                    cant_dias=dias, precio_total=precioTotal,usuario=request.user) 
 
                 ins2 = Habitacion(fecha_checking=pickerL_checking, fecha_checkout=pickerR_checkout)
 
@@ -141,7 +144,7 @@ def reservas(request):
                 return render({'mensaje':'Debe loguearse para poder reservar.'})
                     
         
-    return render(request, 'hotelApp1/reservas.html')
+    return render(request, 'hotelApp1/reservas.html', context)
 #-------------------------------------------------------------------------------
 
 def confirmacion(request):
