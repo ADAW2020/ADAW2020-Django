@@ -137,10 +137,10 @@ def reservas(request):
                 ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
                     cant_dias=dias, precio_total=precioTotal, usuario=request.user) 
                 #import pdb; pdb.set_trace()
-                #ins2 = Habitacion(fecha_checking=pickerL_checking, fecha_checkout=pickerR_checkout)
+                ins2 = Habitacion(fecha_checking=pickerL_checking, fecha_checkout=pickerR_checkout)
 
                 ins1.save()
-                #ins2.save()
+                ins2.save()
 
     else:
                 return render({'mensaje':'Debe loguearse para poder reservar.'})
