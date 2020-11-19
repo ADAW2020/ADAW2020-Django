@@ -51,6 +51,13 @@ def registrar_cliente(request):
         # User wants to enter info
         return render(request, 'hotelApp1/registrar-cliente.html')
 
+#---------------------------------------------------------------------
+
+def consultar(request):
+    
+    return render(request, 'hotelApp1/consultar.html')
+
+
 
 # --------------------------------------------------------------------
 
