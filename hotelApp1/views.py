@@ -14,6 +14,7 @@ import re
 from django.http import HttpResponseRedirect
 from datetime import date
 from datetime import datetime
+import pickle
 #from django.contrib.sessions.models import Session
 # Create your views here.
 
@@ -113,19 +114,21 @@ def reservas(request):
     context_reservas['pickerL'] = pickerL
     context_reservas['cant_huespedes'] = cantH
     context_reservas['cantHabitaciones'] = cantHabitaciones
+    context_reservas['plc'] = pickerL_checking
+    context_reservas['prc'] = pickerR_checkout
     c = pickerL[:2]
     d = pickerR[:2]
     dias = int(c)-int(d)  
     context_reservas['dias'] = dias
     precioTotal = cantHabitaciones * dias *100
     context_reservas['precioTotal'] = precioTotal
-    confirmacion(context_reservas)
+    #confirmacion(context_reservas)
     num_habitacion = 0
     #import pdb; pdb.set_trace()
     if request.method == 'POST': #and request.user.is_authenticated():
               
 
-                print(2) 
+            print(0)
 
                 # ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
                 #     cant_dias=dias, precio_total=precioTotal, usuario=request.user) 
@@ -143,25 +146,40 @@ def reservas(request):
                 return render({'mensaje':'Debe loguearse para poder reservar.'})
                     
       
+    with open('context_reservas.pkl', 'wb') as crpickle:
+        pickle.dump(context_reservas, crpickle)
 
-    return pickerL, pickerL_checking, pickerR, pickerR_checkout, cantH, cantHabitaciones
+    #return pickerL, pickerL_checking, pickerR, pickerR_checkout, cantH, cantHabitaciones
     return render(request, 'hotelApp1/reservas.html', context_reservas)
 #-------------------------------------------------------------------------------
 
-def confirmacion(request,context_reservas):
+def confirmacion(request):
+   
+    with open('context_reservas.pkl', 'rb') as crpickle:
+        datos_reserva = pickle.load(crpickle)
+    print(datos_reserva)
    
     
+    cantH = datos_reserva['cant_huespedes']
+    pickerL = datos_reserva['pickerL']
+    pickerR = datos_reserva['pickerR']
+    cantHabitaciones = datos_reserva['cantHabitaciones']
+    dias = datos_reserva['dias']
+    precioTotal = datos_reserva['precioTotal']
+    pickerL_checking = datos_reserva['plc']
+    pickerR_checkout = datos_reserva['prc']
+    #import pdb; pdb.set_trace()
 
-    # ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
-    #                 cant_dias=dias, precio_total=precioTotal, usuario=request.user) 
-    #             #import pdb; pdb.set_trace()
+    ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
+                    cant_dias=dias, precio_total=precioTotal, usuario=request.user) 
+                #import pdb; pdb.set_trace()
 
                
-    # ins2 = Habitacion(fecha_checking=pickerL_checking, fecha_checkout=pickerR_checkout, disponible=False)
+    ins2 = Habitacion(fecha_checking=pickerL_checking, fecha_checkout=pickerR_checkout, disponible=False)
                 
-    # ins1.save()
-    # if models.Habitacion.disponible == True:
-    #                 ins2._do_update()
+    ins1.save()
+    #if models.Habitacion.disponible == True:
+    ins2.save()
 
 
 
