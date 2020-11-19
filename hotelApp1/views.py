@@ -61,6 +61,22 @@ def consultar(request):
 
 # --------------------------------------------------------------------
 
+def info(request):
+    
+    return render(request, 'hotelApp1/info.html')
+
+
+
+# --------------------------------------------------------------------
+
+def imagenes(request):
+    
+    return render(request, 'hotelApp1/imagenes.html')
+
+
+
+# --------------------------------------------------------------------
+
 def ingresar(request):
 
     if request.method == 'POST':

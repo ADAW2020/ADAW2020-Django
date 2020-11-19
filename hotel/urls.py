@@ -31,5 +31,7 @@ urlpatterns = [
     path('confirmacion.html/',hotelApp1.views.confirmacion, name='confirmacion'),
     path('consultar.html', hotelApp1.views.consultar, name='consultar'),
     path('no_disponibilidad.html',hotelApp1.views.no_disponibilidad, name='no_disponibilidad'),
+    path('info.html', hotelApp1.views.info, name='info'),
+    path('imagenes.html', hotelApp1.views.imagenes, name='imagenes'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
 urlpatterns += staticfiles_urlpatterns()
