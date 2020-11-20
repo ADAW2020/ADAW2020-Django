@@ -209,5 +209,9 @@ def confirmacion(request):
     return render(request, 'hotelApp1/confirmacion.html')
 
 
+#--------------------------------------------------------------
 
+def mi_cuenta(request):
+    
+    return render(request,'hotelApp1/mi_cuenta.html')
 
