@@ -142,11 +142,16 @@ def reservas(request):
     context_reservas['cantHabitaciones'] = cantHabitaciones
     context_reservas['plc'] = pickerL_checking
     context_reservas['prc'] = pickerR_checkout
-    c = pickerL[:2]
-    d = pickerR[:2]
-    dias = int(c)-int(d)  
-    context_reservas['dias'] = dias
-    precioTotal = cantHabitaciones * dias *100
+    # c = pickerL[:2]
+    # d = pickerR[:2]
+    # dias = int(c)-int(d)  
+    # context_reservas['dias'] = dias
+
+    dias2 = pickerR_checkout - pickerL_checking
+    context_reservas['dias'] = dias2.days*(-1)
+    #import pdb; pdb.set_trace()
+
+    precioTotal = cantHabitaciones * dias2.days*(-1) *100
     context_reservas['precioTotal'] = precioTotal
     #confirmacion(context_reservas)
     num_habitacion = 0
