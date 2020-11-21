@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from hotelApp1 import models  # traigo models para poder
-from .models import Habitacion
+from .models import Habitacion, fechaXhabitacion
 from django import forms
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -15,6 +15,7 @@ from django.http import HttpResponseRedirect
 from datetime import date
 from datetime import datetime
 import pickle
+import random
 #from django.contrib.sessions.models import Session
 # Create your views here.
 
@@ -115,15 +116,17 @@ def reservas(request):
     
     pickerL_checking = datetime.strptime(pickerL, '%d/%m/%Y').date()  #convierto la fecha de tipo string a datetime
 
-    habitaciones = Habitacion.objects.all()
+    #habitaciones = Habitacion.objects.all()
+    fechaXhabitaciones = fechaXhabitacion.objects.all()
+    
    
     pl_checking = pickerL_checking
     pr_checkout = pickerR_checkout
 
     
 
-    for h in habitaciones:
-         if h.fecha_checking <= pickerL_checking and pickerR_checkout <= h.fecha_checkout:             
+    for h in fechaXhabitaciones:
+         if h.f_checking <= pickerL_checking and pickerR_checkout <= h.f_checkout:             
             return render(request, 'hotelApp1/no_disponibilidad.html')
 
     cantHabitaciones = int(request.POST.get('cant_habitaciones'))
@@ -191,19 +194,27 @@ def confirmacion(request):
     precioTotal = datos_reserva['precioTotal']
     pickerL_checking = datos_reserva['plc']
     pickerR_checkout = datos_reserva['prc']
+    
     #import pdb; pdb.set_trace()
 
     ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
                     cant_dias=dias, precio_total=precioTotal, usuario=request.user) 
                 #import pdb; pdb.set_trace()
-
-               
-    ins2 = Habitacion(fecha_checking=pickerL_checking, fecha_checkout=pickerR_checkout, disponible=False)
-                
+         
     ins1.save()
-    #if models.Habitacion.disponible == True:
-    ins2.save()
 
+    
+    habitacion_aleatoria = random.randint(1,6)
+
+    fechaXhabitaciones = fechaXhabitacion.objects.all()
+    #  actualizo solo las fechas en la base de datos 
+    # fechaXhabitacion.f_checkout = pickerR_checkout
+    # fechaXhabitacion.f_checking = pickerL_checking
+    
+    ins2 = fechaXhabitacion(f_checkout=pickerR_checkout, f_checking=pickerL_checking, numero_habitacion=habitacion_aleatoria)
+
+    ins2.save()
+    import pdb; pdb.set_trace
 
 
     return render(request, 'hotelApp1/confirmacion.html')

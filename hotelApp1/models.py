@@ -15,11 +15,14 @@ class tipoHabitacion(models.Model):
 class Habitacion(models.Model):
     precio = models.IntegerField()    
     numero = models.IntegerField()
-    disponible = models.BooleanField()
     tipo = models.ForeignKey(tipoHabitacion, on_delete=models.CASCADE)
-    fecha_checking = models.DateField()
-    fecha_checkout = models.DateField()
     
+class fechaXhabitacion(models.Model):
+    f_checking = models.DateField()
+    f_checkout = models.DateField()
+    numero_habitacion = models.IntegerField()
+    
+
 
 class Reservas(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -29,5 +32,5 @@ class Reservas(models.Model):
     cant_huespedes = models.IntegerField()
     cant_habitaciones = models.IntegerField()
     precio_total = models.FloatField()
-    #Habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
     cant_dias = models.IntegerField()
+    #Habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
