@@ -148,6 +148,12 @@ def reservas(request):
     # context_reservas['dias'] = dias
 
     dias2 = pickerR_checkout - pickerL_checking
+
+    fecha_actual = datetime.now().date()
+    
+    if dias2.days*(-1) < 0 and pickerL_checking < datetime.now().date or pickerL_checking < datetime.now().date():
+        return render(request, 'hotelApp1/fechas_erroneas.html')
+
     context_reservas['dias'] = dias2.days*(-1)
     #import pdb; pdb.set_trace()
 
@@ -231,3 +237,7 @@ def mi_cuenta(request):
     
     return render(request,'hotelApp1/mi_cuenta.html')
 
+#--------------------------------------------------------------
+def fechas_erroneas(request):
+    
+    return render(request,'hotelApp1/fechas_erroneas.html')
