@@ -159,21 +159,11 @@ def reservas(request):
     #confirmacion(context_reservas)
     num_habitacion = 0
     #import pdb; pdb.set_trace()
-    if request.method == 'POST': #and request.user.is_authenticated():
+    if request.method == 'POST':
+        print(0)
               
 
-            print(0)
-
-                # ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
-                #     cant_dias=dias, precio_total=precioTotal, usuario=request.user) 
-                # #import pdb; pdb.set_trace()
-
-               
-                # ins2 = Habitacion(fecha_checking=pickerL_checking, fecha_checkout=pickerR_checkout, disponible=False)
-                
-                # ins1.save()
-                # if models.Habitacion.disponible == True:
-                #     ins2._do_update()
+           
                 
 
     else:
@@ -204,28 +194,19 @@ def confirmacion(request):
     pickerR_checkout = datos_reserva['prc']
     
     #import pdb; pdb.set_trace()
-
-    ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
+    if request.user.is_authenticated:
+        ins1 = Reservas(cant_huespedes=cantH,fecha_desde=pickerL, fecha_hasta=pickerR, cant_habitaciones=cantHabitaciones,
                     cant_dias=dias, precio_total=precioTotal, usuario=request.user) 
                 #import pdb; pdb.set_trace()
-         
-    ins1.save()
+        ins1.save()   
+        habitacion_aleatoria = random.randint(1,6)
+        fechaXhabitaciones = fechaXhabitacion.objects.all()
+        ins2 = fechaXhabitacion(f_checkout=pickerR_checkout, f_checking=pickerL_checking, numero_habitacion=habitacion_aleatoria)
+        ins2.save()
+        return render(request, 'hotelApp1/confirmacion.html')
+    else:
+        return render(request, 'hotelApp1/error_no_logueado.html')
 
-    
-    habitacion_aleatoria = random.randint(1,6)
-
-    fechaXhabitaciones = fechaXhabitacion.objects.all()
-    #  actualizo solo las fechas en la base de datos 
-    # fechaXhabitacion.f_checkout = pickerR_checkout
-    # fechaXhabitacion.f_checking = pickerL_checking
-    
-    ins2 = fechaXhabitacion(f_checkout=pickerR_checkout, f_checking=pickerL_checking, numero_habitacion=habitacion_aleatoria)
-
-    ins2.save()
-    import pdb; pdb.set_trace
-
-
-    return render(request, 'hotelApp1/confirmacion.html')
 
 
 #--------------------------------------------------------------
@@ -238,3 +219,8 @@ def mi_cuenta(request):
 def fechas_erroneas(request):
     
     return render(request,'hotelApp1/fechas_erroneas.html')
+#--------------------------------------------------------------
+
+def error_no_logueado(request):
+    
+    return render(request,'hotelApp1/error_no_logueado.html')
