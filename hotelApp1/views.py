@@ -120,13 +120,10 @@ def reservas(request):
     fechaXhabitaciones = fechaXhabitacion.objects.all()
     
    
-    pl_checking = pickerL_checking
-    pr_checkout = pickerR_checkout
-
     
 
     for h in fechaXhabitaciones:
-         if h.f_checking <= pickerL_checking and pickerR_checkout <= h.f_checkout:             
+         if h.f_checking <= pickerL_checking and pickerR_checkout <= h.f_checkout and h.numero_habitacion != None:             
             return render(request, 'hotelApp1/no_disponibilidad.html')
 
     cantHabitaciones = int(request.POST.get('cant_habitaciones'))
