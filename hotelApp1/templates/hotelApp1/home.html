@@ -1,15 +1,12 @@
 {%load static%}
 
-<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+<link href=" https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
 </script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -19,14 +16,40 @@
 
 <link rel="stylesheet" type="text/css" href="/static/Home.css" />
 
-<!-- date picker links-->
-
-<script src="/static/datepicker.js"></script>
 
 
+<!--<script src="/static/datepicker.js"></script>-->
+<script>
 
-<link href=" https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
-<!-- date picker links-->
+    $(document).ready(function(){
+        var minDate = new Date();
+        $("#depart").datepicker({
+            showAnim: 'drop',
+            numberOfMonth: 1,
+            minDate: minDate, 
+            dateFormat: 'dd/mm/yy',
+            onClose: function (selectDate){
+                $('#return').datepicker("option", "minDate", selectDate);
+            }
+        });
+    
+        $("#return").datepicker({
+            showAnim: 'drop',
+            numberOfMonth: 1,
+            minDate: minDate, 
+            dateFormat: 'dd/mm/yy',
+            onClose: function (selectDate){
+                $('#return').datepicker("option", "minDate", selectDate)
+            }
+        });
+    
+    });
+    
+    </script>
+
+
+
+
 
 <style>
     form {
@@ -43,7 +66,7 @@
 
             {% if user.is_authenticated %}
             <a class="btn btn-dark salir" href="javascript:{document.getElementById('salir').submit()}" onclick="">Logout</a>
-            
+            <a href="micuenta.html" class="btn btn-dark consultas" role="button" aria-pressed="true">MiCuenta</a>
             <a href="consultar.html" class="btn btn-dark consultas" role="button" aria-pressed="true">Consultas</a>
             
 
@@ -72,7 +95,7 @@
 
 
         <div class="dpicker-right">
-            <input type="text" class="form-control" name="pickerR" id="depart" aria-label="Large"
+            <input type="text" min="" class="form-control" name="pickerR" id="depart" aria-label="Large"
                 aria-describedby="inputGroup-sizing-sm" placeholder="check-in" required>
             
             <div class="huesped">
@@ -122,7 +145,7 @@
 
 
 
-
+<!--
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
 </script>
@@ -132,6 +155,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
 </script>
+-->
 </body>
 
 </html>

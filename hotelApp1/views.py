@@ -109,9 +109,9 @@ def reservas(request):
     
 
     pickerR = request.POST.get('pickerR', None)
-   
-    pickerR_checkout = datetime.strptime(pickerR, '%d/%m/%Y').date() #convierto la fecha de tipo string a datetime
     
+    pickerR_checkout = datetime.strptime(pickerR, '%d/%m/%Y').date() #convierto la fecha de tipo string a datetime
+    #import pdb; pdb.set_trace()
     pickerL = request.POST.get('pickerL', None)
     
     pickerL_checking = datetime.strptime(pickerL, '%d/%m/%Y').date()  #convierto la fecha de tipo string a datetime

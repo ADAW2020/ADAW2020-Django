@@ -1,6 +1,9 @@
 $(document).ready(function(){
     let minDate = new Date();
 
+    const test = $('#depart');
+    console.log(test);
+
     $("#depart").datepicker({
         showAnim: 'drop',
         numberOfMonth: 1,
