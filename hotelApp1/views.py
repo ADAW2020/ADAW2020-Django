@@ -119,7 +119,11 @@ def reservas(request):
     #habitaciones = Habitacion.objects.all()
     fechaXhabitaciones = fechaXhabitacion.objects.all()
     
-   
+    if pickerL == pickerR:
+        return render(request, 'hotelApp1/fechas_erroneas.html')
+
+
+
     
 
     for h in fechaXhabitaciones:
