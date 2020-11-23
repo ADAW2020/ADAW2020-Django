@@ -38,7 +38,7 @@ body {
     margin: 0 auto;
     -webkit-text-stroke: 1px #ffff;
     font-size: 30px;
-    
+    font-weight: 200;
     
 
 }
@@ -65,7 +65,7 @@ body {
 }
 
 .form-control {
-    margin-left: 35%;
+    margin-left:35%;
     border-radius: 1.5rem;
     margin-top: 1px;
     width: 30%;
@@ -78,7 +78,7 @@ body {
 }
 
 .btnSubmit {
-    margin-left: 39%;
+    margin-left: 10px;
     font-size: large;
     font-weight: bolder;
     margin-top: 5px;
