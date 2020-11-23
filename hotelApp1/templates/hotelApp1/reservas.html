@@ -1,68 +1,55 @@
 {%load static%}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 
-		
+
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<link rel="stylesheet" type="text/css" href="/static/Registro_cliente.css"/>
+<link rel="stylesheet" type="text/css" href="/static/reservas.css" />
 
 <div class="general">
 
- 
-
+  {% if error %}
   <div class="error">
-    {% if error %}
     {{ error }}
-    </div>
-    <br/>
-    <br/>
-    {% endif %}
-
-  <form method="POST" action="{% url 'confirmacion' %}"> 
-    {% csrf_token %}
-    <div class="date-pickers">
-    <label class="label-i">fecha ingreso: {{pickerR}}</label>
-  
-    <label class="label-s">fecha salida:{{pickerL}}</label>
-
-    <label class="label-s">cantidad de huespedes: {{cant_huespedes}}</label>     
-  
-    <label class="label-s">Dias:{{dias}}  </label>
-    <br>
-    <label class="label-s">precio total:{{precioTotal}}</label>
-      
   </div>
+  {% endif %}
+
+  <form method="POST" action="{% url 'confirmacion' %}">
+    {% csrf_token %}
+    <div class="contenedor">
+      <div class="info">
+        <p class="p-i">fecha ingreso: {{pickerR}}</p>
+        <p class="p-s">fecha salida: {{pickerL}}</p>
+        <p class="p-s">cantidad de huespedes: {{cant_huespedes}}</p>
+        <p class="p-s">Dias: {{dias}} </p>
+        <p class="p-s">precio total: {{precioTotal}}</p>
+        <p>Cantidad de habitaciones: {{cantHabitaciones}}</p>
+        <p>Tipo de habitacion: {{tipoh}}</p>
   
-    <div>
-      <label>Cantidad de habitaciones {{cantHabitaciones}}</label>
-      
+        <div>
+          
+          
+          <!--          <select name="tipo_hab" id="descripcion">
+            {% for tipoHabitacion in tipo_habitaciones.all %}
+                 <option value='{{tipoHabitacion.id}}'>{{tipoHabitacion.descripcion}}</option>
+
+            {% endfor %}
+          </select>
+          -->
+
+
+        </div>
+      </div>
+      <input type="submit" class="btnSubmit" value="Registrar">
+      <div class="confirmacion">
+        {{ confirmacion }}
+      </div>
     </div>
-
-    <div>
-
-      <label>Tipo de habitación </label>
-      <select name="tipo_hab">
-        {% for tipoHabitacion in tipo_habitaciones.all %}
-
-        <option>{{tipoHabitacion.descripcion}}</option>
-
-        {% endfor %}
-      </select>
-    </div>
-
-    <input type="submit" class="btnSubmit" value="Registrar"> 
-
   </form>
-
-<div class="confirmacion">
-  {{ confirmacion }}
-
-</div>
-
-
 </div>
