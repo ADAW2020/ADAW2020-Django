@@ -21,7 +21,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 
-<form method="POST" action="registrar.py">
+<form action="registrar.py">
     
 <div class="container register-form">
             <div class="form">
@@ -32,29 +32,20 @@
                 
                
     
-    </div>
-    <div class="caja" style="position: unset;">   
-        <h3>Nuestros Servicios son:</h3>
-        
-            <p>TV c/Cable</p>
-            <p>Internet Wifi</p>
-            <p>Pileta</p>
-            <p>Restaurante y Bar</p>
-            <p>Pileta</p>
-            <p>Yoga</p>
-            <p>Abierto las 24hs los 360 dias del año </p>
-        </div>
-        <div class="caja" style="position: unset;">   
-            <h3>Precios</h3>
-            
-               <p>Habitacion Simple: $100 por Noche</p> 
-                <p>Habitacion Doble: $150 por Noche</p>
-                <p>Habitacion Triple: $200 por Noche</p>
-        
-            
             </div>
+    <div class="caja" style="position: unset;">   
+        <h3><b>Mapa del Sitio:</b></h3>
+        <p> </p>
+        <p> <a href="{% url 'info' %}">+ Info</a></p>
+        <p> <a href="{% url 'consultar' %}">Consultas</a></p>
+        <p> <a href="{% url 'home' %}">Home</a></p>
+        <p> <a href="{% url 'ingresar' %}">Ingresar</a></p>
+        <p> <a href="{% url 'imagenes' %}">Imagenes</a> </p>
+        <p> <a href="{% url 'registrar-cliente' %}">Registración</a></p>
+        <p> <a href="{% url 'home' %}">Reservar habitación</a></p>
+     </div>
+        
     
        
 
-            </div>
-        </div></form>
+        </form>

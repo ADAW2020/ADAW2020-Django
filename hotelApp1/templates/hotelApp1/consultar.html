@@ -7,8 +7,8 @@
 
 <link rel="stylesheet" type="text/css" href="/static/consultar.css">
 
-<form method="POST" action="registrar.py">
-
+<form method="POST" action="{% url 'consultar' %}">
+    {% csrf_token %}
 <div class="container register-form">
             <div class="form">
 
@@ -23,29 +23,32 @@
                 
                 <div class="form-content">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Su nombre *" value="" required/>
+                        <input type="text" class="form-control" name="nombre" placeholder="Su nombre *" value="" required/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Su Apellido *" value="" required/>
+                        <input type="text" class="form-control" name="apellido" placeholder="Su Apellido *" value="" required/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Su telefono *" value="" required/>
+                        <input type="text" class="form-control" name="telefono" placeholder="Su telefono *" value="" required/>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Su email *" value="" required/>
+                            <input type="text" class="form-control" name="email" placeholder="Su email *" value="" required/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" placeholder="Consulta *" value="" required></textarea>
+                        <textarea class="form-control" name="consulta" placeholder="Consulta *" value="" required></textarea>
                         <input type="submit" class="btnSubmit" value="Enviar Consulta">  
-                    </div>>
+                    </div>
+                    <div class="mensaje">
+                        {% if mensaje %}
+                      <p>  {{ mensaje }}</p>
+                        </div>
+                        {% endif %}     
+
                 </div>     
                
             </div>
                
         </div>
-                     
-        
-                    
-                
-            
+                  
+       
         </form>

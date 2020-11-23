@@ -1,7 +1,7 @@
 {%load static%}
 
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link href=" https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
 
 
@@ -20,35 +20,30 @@
 
 <!--<script src="/static/datepicker.js"></script>-->
 <script>
-
-    $(document).ready(function(){
+    $(document).ready(function () {
         var minDate = new Date();
         $("#depart").datepicker({
             showAnim: 'drop',
             numberOfMonth: 1,
-            minDate: minDate, 
+            minDate: minDate,
             dateFormat: 'dd/mm/yy',
-            onClose: function (selectDate){
+            onClose: function (selectDate) {
                 $('#return').datepicker("option", "minDate", selectDate);
             }
         });
-    
+
         $("#return").datepicker({
             showAnim: 'drop',
             numberOfMonth: 1,
-            minDate: minDate, 
+            minDate: minDate,
             dateFormat: 'dd/mm/yy',
-            onClose: function (selectDate){
+            onClose: function (selectDate) {
                 $('#return').datepicker("option", "minDate", selectDate)
             }
         });
-    
+
     });
-    
-    </script>
-
-
-
+</script>
 
 
 <style>
@@ -59,16 +54,14 @@
 </style>
 
 <div class="general">
-
     <header>
-
         <nav class="botones-superiores">
-
             {% if user.is_authenticated %}
-            <a class="btn btn-dark salir" href="javascript:{document.getElementById('salir').submit()}" onclick="">Logout</a>
-            <a href="micuenta.html" class="btn btn-dark consultas" role="button" aria-pressed="true">MiCuenta</a>
+            <a class="btn btn-dark salir" href="javascript:{document.getElementById('salir').submit()}"
+                onclick="">Logout</a>
+            <a href="mi_cuenta.html" class="btn btn-dark consultas" role="button" aria-pressed="true">MiCuenta</a>
             <a href="consultar.html" class="btn btn-dark consultas" role="button" aria-pressed="true">Consultas</a>
-            
+
 
             <form id="salir" method="POST" action="{% url 'salir' %}">
                 {% csrf_token %}
@@ -76,86 +69,97 @@
             </form>
             {% else %}
             <a href="{% url 'ingresar' %}" class="btn btn-dark ingresar" role="button" aria-pressed="true">Ingresar</a>
-            <a href="{% url 'registrar-cliente' %}" class="btn btn-dark active" role="button" aria-pressed="true">Registrase</a>
+            <a href="{% url 'registrar-cliente' %}" class="btn btn-dark active" role="button"
+                aria-pressed="true">Registrase</a>
             <a href="consultar.html" class="btn btn-dark consultas" role="button" aria-pressed="true">Consultas</a>
             {% endif %}
 
         </nav>
-        <nav class="botonesizquierdos"  >
-           
+        <nav class="botonesizquierdos">
+
             <a href="imagenes.html" class="btn btn-dark imagenes" role="button" aria-pressed="true">Ver imagenes</a>
             <a href="info.html" class="btn btn-dark info" role="button" aria-pressed="true">+ Info</a>
-        <div class="top">
-            <img src="/static/dbs.png" class="dbsuper">
-        </div>
+            <div class="top">
+                <img src="/static/dbs.png" class="dbsuper">
+            </div>
     </header>
-    
+
     <form method="POST" action="{% url 'reservas' %}">
         {% csrf_token %}
-
-
-        <div class="dpicker-right">
-            <input type="text" min="" class="form-control" name="pickerR" id="depart" aria-label="Large"
-                aria-describedby="inputGroup-sizing-sm" placeholder="check-in" required>
-            
-            <div class="huesped">
-                <h4> <label style="color:white">   Cantidad de huespedes   </label>
-            <select name="cantidad_huespedes" class="select" id="CH">
-             
-                <option value=1>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-                <option value=4>4</option>
-
-             </select>
-            </h4> </div>
+        <div class="dpicker-container">
+            <div class="dpicker-right">
+                <input type="text" min="" class="form-control" name="pickerR" id="depart" aria-label="Large"
+                    aria-describedby="inputGroup-sizing-sm" placeholder="check-in" required>
+                <div class="huesped">
+                    <h4> <label style="color:white"> Cantidad de huespedes </label>
+                        <select name="cantidad_huespedes" class="select" id="CH">
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                        </select>
+                    </h4>
+                </div>
+            </div>
+            <div class="dpicker-left">
+                <input type="text" class="form-control" name="pickerL" id="return" aria-label="Large"
+                    aria-describedby="inputGroup-sizing-sm" placeholder="check-out" required>
+                <div class="habitacion">
+                    <h4> <label style="color:white">Cantidad de habitaciones</label>
+                        <select name="cant_habitaciones">
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                        </select>
+                    </h4>
+                </div>
+            </div>
+            <div class="tipoHabitacion">
+                <h4 class="titulo">Tipo de habitación</h4>
+                <select name="tipo_hab">
+                    <option value=simple>simple</option>
+                    <option value=doble>doble</option>
+                    <option value=triple>triple</option>
+                </select>
+            </div>
         </div>
-
-        <div class="dpicker-left">
-            <input type="text" class="form-control" name="pickerL" id="return" aria-label="Large"
-                aria-describedby="inputGroup-sizing-sm" placeholder="check-out" required>
-
-            <div class="habitacion">
-                <h4> <label style="color:white">Cantidad de habitaciones</label>
-            <select name="cant_habitaciones">
-
-                <option value=1>1</option>
-                <option value=2>2</option>
-                <option value=3>3</option>
-                <option value=4>4</option>
-            </select>   
-        </h4></div>
+        <div class="buscar">
+            <input type="submit" class="btn btn-dark buscar" aria-pressed="true" value="Buscar">
         </div>
-        
-    <div class="buscar">    
-        <input type="submit" class="btn btn-dark buscar" aria-pressed="true" value="Buscar">
-    </div>
-       
     </form>
-
-<div class="social-menu">
+    <div class="social-menu">
         <ul>
             <li><a href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
             <li><a href="https://www.instagram.com"><i class="fa fa-instagram"></i></a></li>
             <li><a href="https://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
         </ul>
-</div>
-
-</div>
-
+    </div>
 
 
 <!--
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-</script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-</script>
+    <div class="caja" style="position: unset;">   
+        <h3><b>Mapa del Sitio:</b></h3>
+        <p> </p>
+        <p> <a href="{% url 'info' %}">+ Info</a></p>
+        <p> <a href="{% url 'consultar' %}">Consultas</a></p>
+        <p> <a href="{% url 'home' %}">Home</a></p>
+        <p> <a href="{% url 'ingresar' %}">Ingresar</a></p>
+        <p> <a href="{% url 'imagenes' %}">Imagenes</a> </p>
+        <p> <a href="{% url 'registrar-cliente' %}">Registración</a></p>
+        <p> <a href="{% url 'home' %}">Reservar habitación</a></p>
+     </div>
+
 -->
+    <div class="mapa-sitio">
+        <a href="{% url 'mapa_de_sitio' %}" class="ms"> Mapa de sitio</a> 
+    </div>
+
+</div>
+
+
+
+
 </body>
 
 </html>

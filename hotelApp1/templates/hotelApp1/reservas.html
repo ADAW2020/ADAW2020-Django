@@ -30,13 +30,20 @@
         <p class="p-s">Dias: {{dias}} </p>
         <p class="p-s">precio total: {{precioTotal}}</p>
         <p>Cantidad de habitaciones: {{cantHabitaciones}}</p>
+        <p>Tipo de habitacion: {{tipoh}}</p>
   
         <div>
-          <p>Tipo de habitación: </p><select name="tipo_hab">
+          
+          
+          <!--          <select name="tipo_hab" id="descripcion">
             {% for tipoHabitacion in tipo_habitaciones.all %}
-            <option>{{tipoHabitacion.descripcion}}</option>
+                 <option value='{{tipoHabitacion.id}}'>{{tipoHabitacion.descripcion}}</option>
+
             {% endfor %}
           </select>
+          -->
+
+
         </div>
       </div>
       <input type="submit" class="btnSubmit" value="Registrar">

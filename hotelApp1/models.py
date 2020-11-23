@@ -33,11 +33,12 @@ class Reservas(models.Model):
     cant_habitaciones = models.IntegerField()
     precio_total = models.FloatField()
     cant_dias = models.IntegerField()
-    #Habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
+    tipo_habitacion = models.CharField(max_length=250)
+
 
 class Consultar(models.Model):
     Nombre = models.CharField(max_length=40)
     Apellido = models.CharField(max_length=40)
-    Telefono = models.IntegerField()
+    Telefono = models.CharField(max_length=250)
     email = models.CharField(max_length=40)
     Consulta = models.CharField(max_length=120)

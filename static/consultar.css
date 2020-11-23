@@ -74,5 +74,13 @@ body{
     background: -webkit-linear-gradient(left, #0072ff, #8811c5);
     color:black;
    
-    
+}
+
+.mensaje{
+
+    text-align: center;
+    margin-left: 0%;
+    font-size: larger;
+    font-weight: bolder;
+    color:lightgreen;
 }
