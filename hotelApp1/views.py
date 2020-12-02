@@ -19,8 +19,6 @@ import random
 #from django.contrib.sessions.models import Session
 # Create your views here.
 
-
-
 def home(request):
     habitaciones = models.Habitacion.objects.all()
     context = {'habitaciones': habitaciones}
@@ -32,7 +30,7 @@ def home(request):
 
     return render(request, 'hotelApp1/home.html', context)
 
-# -----------------------------------------------------------------
+# ------------------------------------------------------------
 
 def registrar_cliente(request):
     if request.method == 'POST':
